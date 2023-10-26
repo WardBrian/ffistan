@@ -120,7 +120,7 @@ int ffistan_sample(const FFIStanModel *ffimodel, size_t num_chains,
     }
 
     error_logger logger;
-    stan::callbacks::interrupt interrupt;
+    ffistan_interrupt_handler interrupt;
 
     std::vector<stan::callbacks::writer> null_writers(num_chains);
 
@@ -233,7 +233,7 @@ int ffistan_pathfinder(const FFIStanModel *ffimodel, size_t num_paths,
     buffer_writer pathfinder_writer(out);
     error_logger logger;
 
-    stan::callbacks::interrupt interrupt;
+    ffistan_interrupt_handler interrupt;
     stan::callbacks::structured_writer dummy_json_writer;
     std::vector<stan::callbacks::writer> null_writers(num_paths);
     std::vector<stan::callbacks::structured_writer> null_structured_writers(
@@ -313,7 +313,7 @@ int ffistan_optimize(const FFIStanModel *ffimodel, const char *init,
     buffer_writer sample_writer(out);
     error_logger logger;
 
-    stan::callbacks::interrupt interrupt;
+    ffistan_interrupt_handler interrupt;
     stan::callbacks::writer null_writer;
 
     bool save_iterations = false;

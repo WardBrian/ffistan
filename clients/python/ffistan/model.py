@@ -200,6 +200,8 @@ class FFIStanModel:
             if err.contents:
                 msg = self._get_error(err.contents).decode("utf-8")
                 self._free_error(err.contents)
+                if msg == "Interrupted":
+                    raise KeyboardInterrupt()
                 raise RuntimeError(msg)
             else:
                 raise RuntimeError(f"Unknown error, function returned code {rc}")

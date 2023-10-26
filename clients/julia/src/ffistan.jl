@@ -64,6 +64,9 @@ function raise_for_error(lib::Ptr{Nothing}, return_code::Cint, err::Ref{Ptr{Cvoi
         )
         msg = unsafe_string(cstr)
         ccall(Libc.Libdl.dlsym(lib, :ffistan_free_stan_error), Cvoid, (Ptr{Cvoid},), err[])
+        if (msg == "Interrupted")
+            error(InterruptException())
+        end
         error(msg)
     end
 end
@@ -440,7 +443,8 @@ if abspath(PROGRAM_FILE) == @__FILE__
     model = FFIStanModel("./test_models/bernoulli/bernoulli.stan")
     data = "./test_models/bernoulli/bernoulli.data.json"
 
-    param_names, draws = sample(model, data)
+    println("Sampling")
+    param_names, draws = sample(model, data; num_samples=100000, num_threads=1)
     println(param_names)
     println(size(draws))
     println(mean(draws, dims = (1, 2))[8])

@@ -69,6 +69,7 @@ FFIStanModel <- R6::R6Class("FFIStanModel", public = list(initialize = function(
             metric_out <- as.raw(rep(0, 8))
         }
 
+        suspendInterrupts(
         vars <- .C("ffistan_sample_R", return_code = as.integer(0), as.raw(model),
             as.integer(num_chains), private$encode_inits(inits), as.integer(seed),
             as.integer(id), as.double(init_radius), as.integer(num_warmup), as.integer(num_samples),
@@ -76,7 +77,7 @@ FFIStanModel <- R6::R6Class("FFIStanModel", public = list(initialize = function(
             as.double(kappa), as.double(t0), as.integer(init_buffer), as.integer(term_buffer),
             as.integer(window), as.logical(save_warmup), as.double(stepsize), as.double(stepsize_jitter),
             as.integer(max_depth), as.integer(refresh), as.integer(num_threads),
-            out = double(output_size), metric= metric_out, err = raw(8), PACKAGE = private$lib_name)
+            out = double(output_size), metric= metric_out, err = raw(8), PACKAGE = private$lib_name))
         handle_error(vars$return_code, private$lib_name, vars$err)
         # reshape the output matrix
         out <- aperm(array(vars$out, dim = c(num_params, num_draws, num_chains),

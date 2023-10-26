@@ -2,6 +2,7 @@
 #define FFISTAN_UTIL_HPP
 
 #include <stan/math/prim/fun/Eigen.hpp>
+#include <stan/callbacks/interrupt.hpp>
 #include <stan/callbacks/writer.hpp>
 #include <stan/callbacks/structured_writer.hpp>
 #include <stan/io/ends_with.hpp>
@@ -15,6 +16,37 @@
 #include <memory>
 #include <stdexcept>
 #include <thread>
+#include <csignal>
+
+volatile std::sig_atomic_t interrupted = false;
+
+class ffistan_interrupt_handler : public stan::callbacks::interrupt {
+ public:
+  ffistan_interrupt_handler() {
+    interrupted = false;
+
+    memset(&custom, 0, sizeof(custom));
+    sigemptyset(&custom.sa_mask);
+    sigaddset(&custom.sa_mask, SIGINT);
+    custom.sa_flags = SA_RESETHAND;
+    custom.sa_handler = &ffistan_interrupt_handler::signal_handler;
+    sigaction(SIGINT, &custom, &before);
+  }
+
+  virtual ~ffistan_interrupt_handler() { sigaction(SIGINT, &before, NULL); }
+
+  void operator()() {
+    if (interrupted) {
+      throw std::runtime_error("Interrupted");
+    }
+  }
+
+  static void signal_handler(int signal) { interrupted = true; }
+
+ private:
+  struct sigaction before;
+  struct sigaction custom;
+};
 
 void init_threading(int num_threads) {
   if (num_threads == -1) {
