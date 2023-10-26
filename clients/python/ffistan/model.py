@@ -1,5 +1,4 @@
 import ctypes
-import subprocess
 from enum import Enum
 import contextlib
 from typing import Any, Dict, Union
@@ -8,6 +7,8 @@ import numpy as np
 from numpy.ctypeslib import ndpointer
 
 from stanio import dump_stan_json
+
+from .compile import compile_model, windows_dll_path_setup
 from .output import StanOutput
 
 double_array = ndpointer(dtype=ctypes.c_double, flags=("C_CONTIGUOUS"))
@@ -61,11 +62,10 @@ def encode_stan_json(data: Union[str, Dict[str, Any]]) -> bytes:
 class FFIStanModel:
     def __init__(self, model):
         if model.endswith(".stan"):
-            libname = model[:-5] + "_model.so"
-            subprocess.run(["make", libname])
-            self._lib = ctypes.CDLL(libname)
-        else:
-            self._lib = ctypes.CDLL(model)
+            model = ctypes.CDLL(compile_model(model))
+
+        windows_dll_path_setup()
+        self._lib = ctypes.CDLL(model)
 
         self._create_model = self._lib.ffistan_create_model
         self._create_model.restype = ctypes.c_void_p
