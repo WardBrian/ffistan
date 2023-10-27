@@ -21,7 +21,6 @@ void ffistan_model_num_free_params_R(FFIStanModel** model, int* n) {
   *n = ffistan_model_num_free_params(*model);
 }
 
-
 void ffistan_separator_char_R(char* sep) { *sep = ffistan_separator_char(); }
 
 void ffistan_sample_R(int* return_code, FFIStanModel** model,
@@ -33,7 +32,13 @@ void ffistan_sample_R(int* return_code, FFIStanModel** model,
                       unsigned int* init_buffer, unsigned int* term_buffer,
                       unsigned int* window, int* save_warmup, double* stepsize,
                       double* stepsize_jitter, int* max_depth, int* refresh,
-                      int* num_threads, double* out, double* metric_out, stan_error** err) {
+                      int* num_threads, double* out, int* save_metric,
+                      double* metric_out, stan_error** err) {
+  //  difficult to directly pass a null pointer from R
+  double* metric_out_ptr = nullptr;
+  if (*save_metric)
+    metric_out_ptr = metric_out;
+
   *return_code = ffistan_sample(
       *model, *num_chains, *inits, *seed, *chain_id, *init_radius, *num_warmup,
       *num_samples, static_cast<FFIStanMetric>(*metric_choice), (*adapt != 0),

@@ -61,12 +61,12 @@ FFIStanModel <- R6::R6Class("FFIStanModel", public = list(initialize = function(
 
         if (save_metric) {
             if (metric == HMCMetric$DENSE) {
-                metric_out <- double(num_chains * free_params * free_params)
+                metric_size <- num_chains * free_params * free_params
             } else {
-                metric_out <- double(num_chains * free_params)
+                metric_size <- num_chains * free_params
             }
         } else {
-            metric_out <- as.raw(rep(0, 8))
+            metric_size <- 2
         }
 
         vars <- .C("ffistan_sample_R", return_code = as.integer(0), as.raw(model),
@@ -76,17 +76,20 @@ FFIStanModel <- R6::R6Class("FFIStanModel", public = list(initialize = function(
             as.double(kappa), as.double(t0), as.integer(init_buffer), as.integer(term_buffer),
             as.integer(window), as.logical(save_warmup), as.double(stepsize), as.double(stepsize_jitter),
             as.integer(max_depth), as.integer(refresh), as.integer(num_threads),
-            out = double(output_size), metric= metric_out, err = raw(8), PACKAGE = private$lib_name)
+            out = double(output_size), save_metric = as.logical(save_metric), metric = double(metric_size),
+            err = raw(8), PACKAGE = private$lib_name)
         handle_error(vars$return_code, private$lib_name, vars$err)
         # reshape the output matrix
         out <- aperm(array(vars$out, dim = c(num_params, num_draws, num_chains),
             dimnames = list(params, NULL, NULL)), c(3, 2, 1))
 
-        if (save_metric){
+        if (save_metric) {
             if (metric == HMCMetric$DENSE) {
-                metric <- aperm(array(vars$metric, dim = c(free_params, free_params, num_chains)), c(3, 2, 1))
+                metric <- aperm(array(vars$metric, dim = c(free_params, free_params,
+                  num_chains)), c(3, 2, 1))
             } else {
-                metric <- aperm(array(vars$metric, dim = c(free_params, num_chains)), c(2, 1))
+                metric <- aperm(array(vars$metric, dim = c(free_params, num_chains)),
+                  c(2, 1))
             }
             return(list(params = params, draws = out, metric = metric))
         }

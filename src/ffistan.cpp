@@ -1,5 +1,4 @@
 #include <stan/callbacks/logger.hpp>
-#include <stan/callbacks/interrupt.hpp>
 #include <stan/callbacks/writer.hpp>
 #include <stan/callbacks/structured_writer.hpp>
 #include <stan/model/model_base.hpp>

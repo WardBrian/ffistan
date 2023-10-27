@@ -20,6 +20,7 @@
 
 volatile std::sig_atomic_t interrupted = false;
 
+// TODO this may not work on windows, maybe ifdef it away
 class ffistan_interrupt_handler : public stan::callbacks::interrupt {
  public:
   ffistan_interrupt_handler() {
