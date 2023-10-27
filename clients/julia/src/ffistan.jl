@@ -443,8 +443,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
     model = FFIStanModel("./test_models/bernoulli/bernoulli.stan")
     data = "./test_models/bernoulli/bernoulli.data.json"
 
-    println("Sampling")
-    param_names, draws = sample(model, data; num_samples=100000, num_threads=1)
+    param_names, draws = sample(model, data)
     println(param_names)
     println(size(draws))
     println(mean(draws, dims = (1, 2))[8])
