@@ -1,0 +1,1030 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>C API &#8212; TinyStan  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/Documenter.css?v=1b4fb8cc" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=4c71fcf5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'languages/c-api';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.3';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/WardBrian/tinystan/main/docs/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="R Interface" href="r.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">TinyStan</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item current active">
+  <a class="nav-link nav-internal" href="../languages.html">
+    Language Interfaces
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/WardBrian/tinystan" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.mc-stan.org/" title="Forums" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-users fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Forums</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item current active">
+  <a class="nav-link nav-internal" href="../languages.html">
+    Language Interfaces
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/WardBrian/tinystan" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.mc-stan.org/" title="Forums" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-users fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Forums</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia.html">Julia Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="r.html">R Interface</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">C API</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../languages.html" class="nav-link">Language Interfaces</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">C API</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="c-api">
+<h1>C API<a class="headerlink" href="#c-api" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Please follow the <a class="reference internal" href="../getting-started.html"><span class="doc">Getting Started guide</span></a> to install
+BridgeStan’s pre-requisites and downloaded a copy of the BridgeStan source code.</p>
+<p>This API is implemented in C++ and exposed to C using the <code class="docutils literal notranslate"><span class="pre">extern</span> <span class="pre">&quot;C&quot;</span></code> directive.
+It is used to implement all the other high-level interfaces. It can also
+be used for its own purposes, such as
+<a class="reference external" href="https://github.com/WardBrian/stan-web-demo">compiling to WebAssembly</a>.</p>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
+<p>The following are the C functions exposed by the TinyStan library in <code class="file docutils literal notranslate"><span class="pre">tinystan.h</span></code>.
+These are wrapped in the various high-level interfaces.</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420tinystan_api_versionPiPiPi">
+<span class="target" id="tinystan_8h_1a843284f92912bdb2bc39a6d6cf8a0125"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_api_version</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">major</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">minor</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">patch</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420tinystan_api_versionPiPiPi" title="Link to this definition">#</a><br /></dt>
+<dd><p>Get the version of the library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>major</strong> – <strong>[out]</strong> The major version number. </p></li>
+<li><p><strong>minor</strong> – <strong>[out]</strong> The minor version number. </p></li>
+<li><p><strong>patch</strong> – <strong>[out]</strong> The patch version number. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421tinystan_stan_versionPiPiPi">
+<span class="target" id="tinystan_8h_1a1d04e7719fab9176ccc1c191cbdfb53c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_stan_version</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">major</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">minor</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">patch</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421tinystan_stan_versionPiPiPi" title="Link to this definition">#</a><br /></dt>
+<dd><p>Get the version of Stan this library is built against. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>major</strong> – <strong>[out]</strong> The major version number. </p></li>
+<li><p><strong>minor</strong> – <strong>[out]</strong> The minor version number. </p></li>
+<li><p><strong>patch</strong> – <strong>[out]</strong> The patch version number </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421tinystan_create_modelPKcjPP13TinyStanError">
+<span class="target" id="tinystan_8h_1a1bea93d3491d547ccf174cb453b987fb"></span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_create_model</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seed</span></span>, <a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421tinystan_create_modelPKcjPP13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Instantiate a model from JSON-encoded data.</p>
+<p>Besides being an argument to the algorithm functions, the model can be used to query the names of the parameters and the number of free parameters. This is essential for constructing output buffers of appropriate size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – <strong>[in]</strong> A path to a JSON file or a string containing JSON-encoded data. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or an empty string if the model does not require data. </p></li>
+<li><p><strong>seed</strong> – <strong>[in]</strong> Random seed. </p></li>
+<li><p><strong>err</strong> – <strong>[out]</strong> Error information. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pointer to the model. Must later be freed with <a class="reference internal" href="#tinystan_8h_1acc7d857a7d926a03c81d296379fdafe5"><span class="std std-ref">tinystan_destroy_model()</span></a>. Returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422tinystan_destroy_modelP13TinyStanModel">
+<span class="target" id="tinystan_8h_1acc7d857a7d926a03c81d296379fdafe5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_destroy_model</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422tinystan_destroy_modelP13TinyStanModel" title="Link to this definition">#</a><br /></dt>
+<dd><p>Deallocate a model. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> – <strong>[in]</strong> The model to deallocate. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426tinystan_model_param_namesPK13TinyStanModel">
+<span class="target" id="tinystan_8h_1a227037a9155176448c8ccdee52201a25"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_model_param_names</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426tinystan_model_param_namesPK13TinyStanModel" title="Link to this definition">#</a><br /></dt>
+<dd><p>Get the names of the parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> – <strong>[in]</strong> The model. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string containing the names of the parameters, comma separated. Multidimensional parameters are flattened, e.g. “foo[2,3]” becomes 6 strings, starting with “foo.1.1”. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430tinystan_model_num_free_paramsPK13TinyStanModel">
+<span class="target" id="tinystan_8h_1a5e152ab1fdca52f010d0beca3c56f6c8"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_model_num_free_params</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430tinystan_model_num_free_paramsPK13TinyStanModel" title="Link to this definition">#</a><br /></dt>
+<dd><p>Get the number of free parameters, i.e., those declared in the parameters block, not transformed parameters or generated quantities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> – <strong>[in]</strong> The model. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of free parameters. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423tinystan_separator_charv">
+<span class="target" id="tinystan_8h_1af70f27b99a590e0a566fc69abb29a3ce"></span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_separator_char</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423tinystan_separator_charv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Returns the separator character which must be used to provide multiple initialization files or json strings.</p>
+<p>Currently, this is ASCII <code class="docutils literal notranslate"><span class="pre">0x1C</span></code>, the file separator character. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415tinystan_samplePK13TinyStanModel6size_tPKcjjdii14TinyStanMetricPKdbddddjjjbddiiiPd6size_tPdPP13TinyStanError">
+<span class="target" id="tinystan_8h_1aa83b13494decd476dfa0e105746bb66f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_sample</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_chains</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">inits</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seed</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">chain_id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_radius</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_warmup</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_samples</span></span>, <a class="reference internal" href="#_CPPv414TinyStanMetric" title="TinyStanMetric"><span class="n"><span class="pre">TinyStanMetric</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">metric_choice</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">init_inv_metric</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">adapt</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">delta</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gamma</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">kappa</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t0</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_buffer</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">term_buffer</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">window</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">save_warmup</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">stepsize</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">stepsize_jitter</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_depth</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">refresh</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_threads</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">out_size</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">metric_out</span></span>, <a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415tinystan_samplePK13TinyStanModel6size_tPKcjjdii14TinyStanMetricPKdbddddjjjbddiiiPd6size_tPdPP13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Run Stan’s No-U-Turn Sampler (NUTS) to sample from the posterior. </p>
+<p>A wrapper around several functions in the <code class="docutils literal notranslate"><span class="pre">stan::services::sample</span></code> namespace. Same-named arguments should be interpreted as having the same meaning as in the Stan documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – <strong>[in]</strong> The TinyStanModel to use for the sampling. </p></li>
+<li><p><strong>num_chains</strong> – <strong>[in]</strong> The number of chains to run. </p></li>
+<li><p><strong>inits</strong> – <strong>[in]</strong> Initial parameter values. This should be a path to a JSON file or a JSON string. If <code class="docutils literal notranslate"><span class="pre">num_chains</span></code> is greater than 1, this can be a list of paths or JSON strings separated by the separator character returned by <a class="reference internal" href="#tinystan_8h_1af70f27b99a590e0a566fc69abb29a3ce"><span class="std std-ref">tinystan_separator_char()</span></a>. </p></li>
+<li><p><strong>seed</strong> – <strong>[in]</strong> The seed to use for the random number generator. </p></li>
+<li><p><strong>chain_id</strong> – <strong>[in]</strong> Chain ID for the first chain. </p></li>
+<li><p><strong>init_radius</strong> – <strong>[in]</strong> Radius to initialize unspecified parameters within. </p></li>
+<li><p><strong>num_warmup</strong> – <strong>[in]</strong> Number of warmup iterations to run. </p></li>
+<li><p><strong>num_samples</strong> – <strong>[in]</strong> Number of samples to draw after warmup. </p></li>
+<li><p><strong>metric_choice</strong> – <strong>[in]</strong> The type of mass matrix to use in the sampler. </p></li>
+<li><p><strong>init_inv_metric</strong> – <strong>[in]</strong> Initial value for the mass matrix used by the sampler. Depending on <code class="docutils literal notranslate"><span class="pre">metric_choice</span></code>, this should be a flattened matrix for a dense metric, or a vector for a diagonal one. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, the sampler will use the identity matrix. </p></li>
+<li><p><strong>adapt</strong> – <strong>[in]</strong> Whether the sampler should adapt the step size and metric. </p></li>
+<li><p><strong>delta</strong> – <strong>[in]</strong> Target average acceptance probability. </p></li>
+<li><p><strong>gamma</strong> – <strong>[in]</strong> Adaptation regularization scale. </p></li>
+<li><p><strong>kappa</strong> – <strong>[in]</strong> Adaptation relaxation exponent. </p></li>
+<li><p><strong>t0</strong> – <strong>[in]</strong> Adaptation iteration offset. </p></li>
+<li><p><strong>init_buffer</strong> – <strong>[in]</strong> Number of warmup samples to use for initial step size adaptation. </p></li>
+<li><p><strong>term_buffer</strong> – <strong>[in]</strong> Number of warmup samples to use for step size adaptation after the metric is adapted. </p></li>
+<li><p><strong>window</strong> – <strong>[in]</strong> Initial number of iterations to use for metric adaptation. </p></li>
+<li><p><strong>save_warmup</strong> – <strong>[in]</strong> Whether to save the warmup samples. </p></li>
+<li><p><strong>stepsize</strong> – <strong>[in]</strong> Initial step size for the sampler. </p></li>
+<li><p><strong>stepsize_jitter</strong> – <strong>[in]</strong> Amount of random jitter to add to the step size. </p></li>
+<li><p><strong>max_depth</strong> – <strong>[in]</strong> Maximum tree depth for the sampler. </p></li>
+<li><p><strong>refresh</strong> – <strong>[in]</strong> Number of iterations between progress messages. </p></li>
+<li><p><strong>num_threads</strong> – <strong>[in]</strong> Number of threads to use for sampling. </p></li>
+<li><p><strong>out</strong> – <strong>[out]</strong> Buffer to store the samples. The buffer should be large enough to store <code class="docutils literal notranslate"><span class="pre">num_chains</span> <span class="pre">*</span> <span class="pre">(num_samples</span> <span class="pre">+</span> <span class="pre">save_warmup</span> <span class="pre">*</span> <span class="pre">num_warmup)</span> <span class="pre">*</span> <span class="pre">num_params</span></code> doubles. </p></li>
+<li><p><strong>out_size</strong> – <strong>[in]</strong> Size of the buffer in doubles. Used for bounds checking unless TINYSTAN_NO_BOUNDS_CHECK is defined, in which case it is ignored. </p></li>
+<li><p><strong>metric_out</strong> – <strong>[out]</strong> Buffer to store the metric. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. If non-NULL, the buffer should be large enough to store <a class="reference internal" href="#tinystan_8h_1a5e152ab1fdca52f010d0beca3c56f6c8"><span class="std std-ref">tinystan_model_num_free_params()</span></a> doubles if using a diagonal matrix, and the free parameters squared if using a dense one. </p></li>
+<li><p><strong>err</strong> – <strong>[out]</strong> Error information. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Zero on success, non-zero on error. If an error occurs, <code class="docutils literal notranslate"><span class="pre">err</span></code> will be set to a non-NULL value which must be freed with <a class="reference internal" href="#tinystan_8h_1a00e4344ffbbf7eb94470f98f0806b424"><span class="std std-ref">tinystan_destroy_error()</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419tinystan_pathfinderPK13TinyStanModel6size_tPKcjjdiiddddddiiibbiiPd6size_tPP13TinyStanError">
+<span class="target" id="tinystan_8h_1ae7e738b303ea52fff82d58fa8dd25591"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_pathfinder</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_paths</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">inits</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seed</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_radius</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_draws</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_history_size</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_alpha</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_obj</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_rel_obj</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_grad</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_rel_grad</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_param</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_iterations</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_elbo_draws</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_multi_draws</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">calculate_lp</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">psis_resample</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">refresh</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_threads</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">out_size</span></span>, <a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419tinystan_pathfinderPK13TinyStanModel6size_tPKcjjdiiddddddiiibbiiPd6size_tPP13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Run the Pathfinder algorithm to approximate the posterior. </p>
+<p>A wrapper around the functions in the <code class="docutils literal notranslate"><span class="pre">stan::services::pathfinder</span></code> namespace. Same-named arguments should be interpreted as having the same meaning as in the Stan documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – <strong>[in]</strong> The TinyStanModel to use for the sampling. </p></li>
+<li><p><strong>num_paths</strong> – <strong>[in]</strong> The number of individual runs of the algorithm to run in parallel. </p></li>
+<li><p><strong>inits</strong> – <strong>[in]</strong> Initial parameter values. This should be a path to a JSON file or a JSON string. If <code class="docutils literal notranslate"><span class="pre">num_paths</span></code> is greater than 1, this can be a list of paths or JSON strings separated by the separator character returned by <a class="reference internal" href="#tinystan_8h_1af70f27b99a590e0a566fc69abb29a3ce"><span class="std std-ref">tinystan_separator_char()</span></a>. </p></li>
+<li><p><strong>seed</strong> – <strong>[in]</strong> The seed to use for the random number generator. </p></li>
+<li><p><strong>id</strong> – <strong>[in]</strong> ID for the first path. </p></li>
+<li><p><strong>init_radius</strong> – <strong>[in]</strong> Radius to initialize unspecified parameters within. </p></li>
+<li><p><strong>num_draws</strong> – <strong>[in]</strong> Number of approximate draws drawn from each of the <code class="docutils literal notranslate"><span class="pre">num_paths</span></code> Pathfinders. </p></li>
+<li><p><strong>max_history_size</strong> – <strong>[in]</strong> History size used by the internal L-BFGS algorithm to approximate the Hessian. </p></li>
+<li><p><strong>init_alpha</strong> – <strong>[in]</strong> Initial step size for the internal L-BFGS algorithm. </p></li>
+<li><p><strong>tol_obj</strong> – <strong>[in]</strong> Convergence tolerance for the objective function for the internal L-BFGS algorithm. </p></li>
+<li><p><strong>tol_rel_obj</strong> – <strong>[in]</strong> Relative convergence tolerance for the objective function for the internal L-BFGS algorithm. </p></li>
+<li><p><strong>tol_grad</strong> – <strong>[in]</strong> Convergence tolerance for the gradient norm for the internal L-BFGS algorithm. </p></li>
+<li><p><strong>tol_rel_grad</strong> – <strong>[in]</strong> Relative convergence tolerance for the gradient norm for the internal L-BFGS algorithm. </p></li>
+<li><p><strong>tol_param</strong> – <strong>[in]</strong> Convergence tolerance for the changes in parameters for the internal L-BFGS algorithm. </p></li>
+<li><p><strong>num_iterations</strong> – <strong>[in]</strong> Maximum number of iterations for the internal L-BFGS algorithm. </p></li>
+<li><p><strong>num_elbo_draws</strong> – <strong>[in]</strong> Number of Monte Carlo draws used to estimate the ELBO. </p></li>
+<li><p><strong>num_multi_draws</strong> – <strong>[in]</strong> Number of draws returned by Multi-Pathfinder. </p></li>
+<li><p><strong>calculate_lp</strong> – <strong>[in]</strong> Whether to calculate the log probability of the approximate draws. </p></li>
+<li><p><strong>psis_resample</strong> – <strong>[in]</strong> Whether to use Pareto smoothed importance sampling on the approximate draws. </p></li>
+<li><p><strong>refresh</strong> – <strong>[in]</strong> Number of iterations between progress messages. </p></li>
+<li><p><strong>num_threads</strong> – <strong>[in]</strong> Number of threads to use for Pathfinder. </p></li>
+<li><p><strong>out</strong> – <strong>[out]</strong> Buffer to store the samples. The buffer should be large enough to store <code class="docutils literal notranslate"><span class="pre">num_multi_draws</span></code> doubles if psis_resample is true, or <code class="docutils literal notranslate"><span class="pre">num_paths</span> <span class="pre">*</span> <span class="pre">num_draws</span></code> doubles otherwise. </p></li>
+<li><p><strong>out_size</strong> – <strong>[in]</strong> Size of the buffer in doubles. Used for bounds checking unless TINYSTAN_NO_BOUNDS_CHECK is defined, in which case it is ignored. </p></li>
+<li><p><strong>err</strong> – <strong>[out]</strong> Error information. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Zero on success, non-zero on error. If an error occurs, <code class="docutils literal notranslate"><span class="pre">err</span></code> will be set to a non-NULL value which must be freed with <a class="reference internal" href="#tinystan_8h_1a00e4344ffbbf7eb94470f98f0806b424"><span class="std std-ref">tinystan_destroy_error()</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417tinystan_optimizePK13TinyStanModelPKcjjd29TinyStanOptimizationAlgorithmibiddddddiiPd6size_tPP13TinyStanError">
+<span class="target" id="tinystan_8h_1a8a6509c93f742fdcf63e7568c2935b97"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_optimize</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">model</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">init</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seed</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_radius</span></span>, <a class="reference internal" href="#_CPPv429TinyStanOptimizationAlgorithm" title="TinyStanOptimizationAlgorithm"><span class="n"><span class="pre">TinyStanOptimizationAlgorithm</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">algorithm</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_iterations</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">jacobian</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_history_size</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">init_alpha</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_obj</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_rel_obj</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_grad</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_rel_grad</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tol_param</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">refresh</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_threads</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">out_size</span></span>, <a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417tinystan_optimizePK13TinyStanModelPKcjjd29TinyStanOptimizationAlgorithmibiddddddiiPd6size_tPP13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Optimize the model parameters using the specified algorithm. </p>
+<p>A wrapper around the functions in the <code class="docutils literal notranslate"><span class="pre">stan::services::optimize</span></code> namespace. Same-named arguments should be interpreted as having the same meaning as in the Stan documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – <strong>[in]</strong> The TinyStanModel to use for the optimization. </p></li>
+<li><p><strong>init</strong> – <strong>[in]</strong> Initial parameter values. This should be a path to a JSON file or a JSON string. </p></li>
+<li><p><strong>seed</strong> – <strong>[in]</strong> The seed to use for the random number generator. </p></li>
+<li><p><strong>id</strong> – <strong>[in]</strong> ID used to offset the random number generator. </p></li>
+<li><p><strong>init_radius</strong> – <strong>[in]</strong> Radius to initialize unspecified parameters within. </p></li>
+<li><p><strong>algorithm</strong> – <strong>[in]</strong> Which optimization algorithm to use. Some of the following arguments may be ignored depending on the algorithm. </p></li>
+<li><p><strong>num_iterations</strong> – <strong>[in]</strong> Maximum number of iterations to run the optimization. </p></li>
+<li><p><strong>jacobian</strong> – <strong>[in]</strong> Whether to apply the Jacobian change of variables to the log density. If False, the algorithm will find the MLE. If True, the algorithm will find the MAP estimate. </p></li>
+<li><p><strong>max_history_size</strong> – <strong>[in]</strong> History size used to approximate the Hessian. </p></li>
+<li><p><strong>init_alpha</strong> – <strong>[in]</strong> Initial step size. </p></li>
+<li><p><strong>tol_obj</strong> – <strong>[in]</strong> Convergence tolerance for the objective function. </p></li>
+<li><p><strong>tol_rel_obj</strong> – <strong>[in]</strong> Relative convergence tolerance for the objective function. </p></li>
+<li><p><strong>tol_grad</strong> – <strong>[in]</strong> Convergence tolerance for the gradient norm. </p></li>
+<li><p><strong>tol_rel_grad</strong> – <strong>[in]</strong> Relative convergence tolerance for the gradient norm. </p></li>
+<li><p><strong>tol_param</strong> – <strong>[in]</strong> Convergence tolerance for the changes in parameters. </p></li>
+<li><p><strong>refresh</strong> – <strong>[in]</strong> Number of iterations between progress messages. </p></li>
+<li><p><strong>num_threads</strong> – <strong>[in]</strong> Number of threads to use for log density evaluations. </p></li>
+<li><p><strong>out</strong> – <strong>[out]</strong> Buffer to store the samples. The buffer should be large enough to store <code class="docutils literal notranslate"><span class="pre">num_params</span></code> doubles. </p></li>
+<li><p><strong>out_size</strong> – <strong>[in]</strong> Size of the buffer in doubles. Used for bounds checking unless TINYSTAN_NO_BOUNDS_CHECK is defined, in which case it is ignored. </p></li>
+<li><p><strong>err</strong> – <strong>[out]</strong> Error information. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Zero on success, non-zero on error. If an error occurs, <code class="docutils literal notranslate"><span class="pre">err</span></code> will be set to a non-NULL value which must be freed with <a class="reference internal" href="#tinystan_8h_1a00e4344ffbbf7eb94470f98f0806b424"><span class="std std-ref">tinystan_destroy_error()</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423tinystan_laplace_samplePK13TinyStanModelPKdPKcjibbiiPd6size_tPdPP13TinyStanError">
+<span class="target" id="tinystan_8h_1a9f42b5d5748b00cf6e9350b9ada0fe9a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_laplace_sample</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">tmodel</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">theta_hat_constr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">theta_hat_json</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seed</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_draws</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">jacobian</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">calculate_lp</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">refresh</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_threads</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">out_size</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">hessian_out</span></span>, <a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423tinystan_laplace_samplePK13TinyStanModelPKdPKcjibbiiPd6size_tPdPP13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Sample from the Laplace approximation of the posterior centered at the provided mode. </p>
+<p>A wrapper around the functions in the <code class="docutils literal notranslate"><span class="pre">stan::services::laplace_sample</span></code> namespace.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tmodel</strong> – <strong>[in]</strong> The TinyStanModel to use for the sampling. </p></li>
+<li><p><strong>theta_hat_constr</strong> – <strong>[in]</strong> The mode to center the Laplace approximation on. This should be a pointer to an array of doubles on the constrained scale, like the one returned by <a class="reference internal" href="#tinystan_8h_1a8a6509c93f742fdcf63e7568c2935b97"><span class="std std-ref">tinystan_optimize()</span></a>. At most one of <code class="docutils literal notranslate"><span class="pre">theta_hat_constr</span></code> and <code class="docutils literal notranslate"><span class="pre">theta_hat_json</span></code> should be non-NULL. </p></li>
+<li><p><strong>theta_hat_json</strong> – <strong>[in]</strong> A path to a JSON file or JSON string representing the mode on the constrained scale. At most one of <code class="docutils literal notranslate"><span class="pre">theta_hat_constr</span></code> and <code class="docutils literal notranslate"><span class="pre">theta_hat_json</span></code> should be non-NULL. </p></li>
+<li><p><strong>seed</strong> – <strong>[in]</strong> The seed to use for the random number generator. </p></li>
+<li><p><strong>num_draws</strong> – <strong>[in]</strong> Number of draws. </p></li>
+<li><p><strong>jacobian</strong> – <strong>[in]</strong> Whether to apply the Jacobian change of variables to the log density. <strong>Note:</strong> This should match the value used when the mode was calculated. </p></li>
+<li><p><strong>calculate_lp</strong> – <strong>[in]</strong> Whether to calculate the log probability of the samples. </p></li>
+<li><p><strong>refresh</strong> – <strong>[in]</strong> Number of iterations between progress messages. </p></li>
+<li><p><strong>num_threads</strong> – <strong>[in]</strong> Number of threads to use for log density evaluations. </p></li>
+<li><p><strong>out</strong> – <strong>[out]</strong> Buffer to store the samples. The buffer should be large enough to store <code class="docutils literal notranslate"><span class="pre">num_draws</span> <span class="pre">*</span> <span class="pre">num_params</span></code> doubles. </p></li>
+<li><p><strong>out_size</strong> – <strong>[in]</strong> Size of the buffer in doubles. Used for bounds checking unless TINYSTAN_NO_BOUNDS_CHECK is defined, in which case it is ignored. </p></li>
+<li><p><strong>hessian_out</strong> – <strong>[out]</strong> Buffer to store the Hessian matrix calculated at the mode. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. </p></li>
+<li><p><strong>err</strong> – <strong>[out]</strong> Error information. Can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Zero on success, non-zero on error. If an error occurs, <code class="docutils literal notranslate"><span class="pre">err</span></code> will be set to a non-NULL value which must be freed with <a class="reference internal" href="#tinystan_8h_1a00e4344ffbbf7eb94470f98f0806b424"><span class="std std-ref">tinystan_destroy_error()</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426tinystan_get_error_messagePK13TinyStanError">
+<span class="target" id="tinystan_8h_1aae260d2dd16a455e9b7f0bb2a5dfa1aa"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_get_error_message</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426tinystan_get_error_messagePK13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Get the error message from an error object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>err</strong> – <strong>[in]</strong> The error object. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The error message. Will be freed when the error object is freed, so copy it if you need it later. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423tinystan_get_error_typePK13TinyStanError">
+<span class="target" id="tinystan_8h_1a3fd5a13fe13a0d2cb5c29dbb03b7c9fe"></span><a class="reference internal" href="#_CPPv417TinyStanErrorType" title="TinyStanErrorType"><span class="n"><span class="pre">TinyStanErrorType</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_get_error_type</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423tinystan_get_error_typePK13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Get the type of error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>err</strong> – <strong>[in]</strong> The error object. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type of error. This is intended to provide more information about the kind of error, allowing for more specific handling. For example, the <code class="docutils literal notranslate"><span class="pre">interrupt</span></code> value can be used to distinguish between a user interrupt and a generic error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422tinystan_destroy_errorP13TinyStanError">
+<span class="target" id="tinystan_8h_1a00e4344ffbbf7eb94470f98f0806b424"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_destroy_error</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">err</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422tinystan_destroy_errorP13TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Free the error object.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will invalidate any pointers returned by <a class="reference internal" href="#tinystan_8h_1aae260d2dd16a455e9b7f0bb2a5dfa1aa"><span class="std std-ref">tinystan_get_error_message()</span></a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>err</strong> – <strong>[in]</strong> The error object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427tinystan_set_print_callback23TINYSTAN_PRINT_CALLBACK">
+<span class="target" id="tinystan_8h_1a0368405f128b651b309291eb1e961927"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tinystan_set_print_callback</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423TINYSTAN_PRINT_CALLBACK" title="TINYSTAN_PRINT_CALLBACK"><span class="n"><span class="pre">TINYSTAN_PRINT_CALLBACK</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">print</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427tinystan_set_print_callback23TINYSTAN_PRINT_CALLBACK" title="Link to this definition">#</a><br /></dt>
+<dd><p>Set the callback function for printing messages. If this is not set, messages will be printed to stdout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>print</strong> – <strong>[in]</strong> The callback function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv413TinyStanError">
+<span class="target" id="tinystan_8h_1a322284c0e4d8099923416cf0b4b46776"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanError" title="TinyStanError"><span class="n"><span class="pre">TinyStanError</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TinyStanError</span></span></span><a class="headerlink" href="#_CPPv413TinyStanError" title="Link to this definition">#</a><br /></dt>
+<dd><p>Opaque type for errors.</p>
+<p>Functions in TinyStan that can fail will accept a nullable <code class="docutils literal notranslate"><span class="pre">TinyStanError**</span></code> argument as their last parameter.</p>
+<p>In addition to returning an integer status code (most functions), or NULL (allocation functions), they can also set this argument to a new error object if it itself was not NULL. This must be freed with <a class="reference internal" href="#tinystan_8h_1a00e4344ffbbf7eb94470f98f0806b424"><span class="std std-ref">tinystan_destroy_error()</span></a> when no longer needed. The error object contains a message describing the error which can be retrieved with <a class="reference internal" href="#tinystan_8h_1aae260d2dd16a455e9b7f0bb2a5dfa1aa"><span class="std std-ref">tinystan_get_error_message()</span></a>, and and a type field that can be used to distinguish between different kinds of errors which can be retrieved with <a class="reference internal" href="#tinystan_8h_1a3fd5a13fe13a0d2cb5c29dbb03b7c9fe"><span class="std std-ref">tinystan_get_error_type()</span></a></p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv413TinyStanModel">
+<span class="target" id="tinystan_8h_1a7cc8367d46c2e5c3b9345b63a8e0aae0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv413TinyStanModel" title="TinyStanModel"><span class="n"><span class="pre">TinyStanModel</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TinyStanModel</span></span></span><a class="headerlink" href="#_CPPv413TinyStanModel" title="Link to this definition">#</a><br /></dt>
+<dd><p>Opaque type for models. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv423TINYSTAN_PRINT_CALLBACK">
+<span class="target" id="tinystan_8h_1a1ef45d968f1127c95021aab2035f1bc5"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TINYSTAN_PRINT_CALLBACK</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">bad</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv423TINYSTAN_PRINT_CALLBACK" title="Link to this definition">#</a><br /></dt>
+<dd><p>Callback used for printing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param msg<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> The message to print. </p>
+</dd>
+<dt class="field-even">Param len<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> The length of the message. </p>
+</dd>
+<dt class="field-odd">Param bad<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> Whether the message is an error message or not </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv414TinyStanMetric">
+<span class="target" id="tinystan_8h_1a68300b51b31eeab8ec83f12b44411a56"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TinyStanMetric</span></span></span><a class="headerlink" href="#_CPPv414TinyStanMetric" title="Link to this definition">#</a><br /></dt>
+<dd><p>Choice of metric for HMC. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14TinyStanMetric4unitE">
+<span class="target" id="tinystan_8h_1a68300b51b31eeab8ec83f12b44411a56a0309f85ec7cb2822fcbbbb4904ae697e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unit</span></span></span><a class="headerlink" href="#_CPPv4N14TinyStanMetric4unitE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14TinyStanMetric5denseE">
+<span class="target" id="tinystan_8h_1a68300b51b31eeab8ec83f12b44411a56ae8716347cc7fdaf9fc25cc0e20c2ab26"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dense</span></span></span><a class="headerlink" href="#_CPPv4N14TinyStanMetric5denseE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14TinyStanMetric8diagonalE">
+<span class="target" id="tinystan_8h_1a68300b51b31eeab8ec83f12b44411a56a5d6523206913ae5c7f34b2dfc25f2f49"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">diagonal</span></span></span><a class="headerlink" href="#_CPPv4N14TinyStanMetric8diagonalE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv429TinyStanOptimizationAlgorithm">
+<span class="target" id="tinystan_8h_1a44ea91934f45491a9d06eacdc315e05b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TinyStanOptimizationAlgorithm</span></span></span><a class="headerlink" href="#_CPPv429TinyStanOptimizationAlgorithm" title="Link to this definition">#</a><br /></dt>
+<dd><p>Choice of optimization algorithm. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29TinyStanOptimizationAlgorithm6newtonE">
+<span class="target" id="tinystan_8h_1a44ea91934f45491a9d06eacdc315e05bac4ce242a367cdba0274d9e97d8b71241"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">newton</span></span></span><a class="headerlink" href="#_CPPv4N29TinyStanOptimizationAlgorithm6newtonE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29TinyStanOptimizationAlgorithm4bfgsE">
+<span class="target" id="tinystan_8h_1a44ea91934f45491a9d06eacdc315e05ba083db2da94547df3ed9a6d29484130fd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bfgs</span></span></span><a class="headerlink" href="#_CPPv4N29TinyStanOptimizationAlgorithm4bfgsE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29TinyStanOptimizationAlgorithm5lbfgsE">
+<span class="target" id="tinystan_8h_1a44ea91934f45491a9d06eacdc315e05bac5d6ad2e789745e3ff8ab57acc6a0b30"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lbfgs</span></span></span><a class="headerlink" href="#_CPPv4N29TinyStanOptimizationAlgorithm5lbfgsE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv417TinyStanErrorType">
+<span class="target" id="tinystan_8h_1a11df2b528e48d821560522c2e71c13e2"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TinyStanErrorType</span></span></span><a class="headerlink" href="#_CPPv417TinyStanErrorType" title="Link to this definition">#</a><br /></dt>
+<dd><p>An enum representing different kinds of errors TinyStan can generate. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17TinyStanErrorType7genericE">
+<span class="target" id="tinystan_8h_1a11df2b528e48d821560522c2e71c13e2ac371ceec5fe0adff5a538b2bd845e678"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">generic</span></span></span><a class="headerlink" href="#_CPPv4N17TinyStanErrorType7genericE" title="Link to this definition">#</a><br /></dt>
+<dd><p>A generic runtime error from Stan. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17TinyStanErrorType6configE">
+<span class="target" id="tinystan_8h_1a11df2b528e48d821560522c2e71c13e2ab24e4a61d95cef52b430c0fabaa13834"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">config</span></span></span><a class="headerlink" href="#_CPPv4N17TinyStanErrorType6configE" title="Link to this definition">#</a><br /></dt>
+<dd><p>An invalid configuration for the algorithm. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17TinyStanErrorType9interruptE">
+<span class="target" id="tinystan_8h_1a11df2b528e48d821560522c2e71c13e2a193148dae8e245f049e6b434ee5822b2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interrupt</span></span></span><a class="headerlink" href="#_CPPv4N17TinyStanErrorType9interruptE" title="Link to this definition">#</a><br /></dt>
+<dd><p>The user interrupted the algorithm with <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code>. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="r.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">R Interface</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv420tinystan_api_versionPiPiPi"><code class="docutils literal notranslate"><span class="pre">tinystan_api_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421tinystan_stan_versionPiPiPi"><code class="docutils literal notranslate"><span class="pre">tinystan_stan_version()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421tinystan_create_modelPKcjPP13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_create_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422tinystan_destroy_modelP13TinyStanModel"><code class="docutils literal notranslate"><span class="pre">tinystan_destroy_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426tinystan_model_param_namesPK13TinyStanModel"><code class="docutils literal notranslate"><span class="pre">tinystan_model_param_names()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430tinystan_model_num_free_paramsPK13TinyStanModel"><code class="docutils literal notranslate"><span class="pre">tinystan_model_num_free_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423tinystan_separator_charv"><code class="docutils literal notranslate"><span class="pre">tinystan_separator_char()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415tinystan_samplePK13TinyStanModel6size_tPKcjjdii14TinyStanMetricPKdbddddjjjbddiiiPd6size_tPdPP13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_sample()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419tinystan_pathfinderPK13TinyStanModel6size_tPKcjjdiiddddddiiibbiiPd6size_tPP13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_pathfinder()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417tinystan_optimizePK13TinyStanModelPKcjjd29TinyStanOptimizationAlgorithmibiddddddiiPd6size_tPP13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_optimize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423tinystan_laplace_samplePK13TinyStanModelPKdPKcjibbiiPd6size_tPdPP13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_laplace_sample()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426tinystan_get_error_messagePK13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_get_error_message()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423tinystan_get_error_typePK13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_get_error_type()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422tinystan_destroy_errorP13TinyStanError"><code class="docutils literal notranslate"><span class="pre">tinystan_destroy_error()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427tinystan_set_print_callback23TINYSTAN_PRINT_CALLBACK"><code class="docutils literal notranslate"><span class="pre">tinystan_set_print_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413TinyStanError"><code class="docutils literal notranslate"><span class="pre">TinyStanError</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413TinyStanModel"><code class="docutils literal notranslate"><span class="pre">TinyStanModel</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423TINYSTAN_PRINT_CALLBACK"><code class="docutils literal notranslate"><span class="pre">TINYSTAN_PRINT_CALLBACK</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414TinyStanMetric"><code class="docutils literal notranslate"><span class="pre">TinyStanMetric</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N14TinyStanMetric4unitE"><code class="docutils literal notranslate"><span class="pre">TinyStanMetric::unit</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N14TinyStanMetric5denseE"><code class="docutils literal notranslate"><span class="pre">TinyStanMetric::dense</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N14TinyStanMetric8diagonalE"><code class="docutils literal notranslate"><span class="pre">TinyStanMetric::diagonal</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv429TinyStanOptimizationAlgorithm"><code class="docutils literal notranslate"><span class="pre">TinyStanOptimizationAlgorithm</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N29TinyStanOptimizationAlgorithm6newtonE"><code class="docutils literal notranslate"><span class="pre">TinyStanOptimizationAlgorithm::newton</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N29TinyStanOptimizationAlgorithm4bfgsE"><code class="docutils literal notranslate"><span class="pre">TinyStanOptimizationAlgorithm::bfgs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N29TinyStanOptimizationAlgorithm5lbfgsE"><code class="docutils literal notranslate"><span class="pre">TinyStanOptimizationAlgorithm::lbfgs</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417TinyStanErrorType"><code class="docutils literal notranslate"><span class="pre">TinyStanErrorType</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17TinyStanErrorType7genericE"><code class="docutils literal notranslate"><span class="pre">TinyStanErrorType::generic</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17TinyStanErrorType6configE"><code class="docutils literal notranslate"><span class="pre">TinyStanErrorType::config</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17TinyStanErrorType9interruptE"><code class="docutils literal notranslate"><span class="pre">TinyStanErrorType::interrupt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/WardBrian/tinystan/edit/main/docs/languages/c-api.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/languages/c-api.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, TinyStan Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

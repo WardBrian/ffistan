@@ -1,0 +1,1566 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tinystan.model &#8212; TinyStan  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/Documenter.css?v=1b4fb8cc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=4c71fcf5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tinystan/model';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.3';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/WardBrian/tinystan/main/docs/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">TinyStan</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="../../languages.html">
+    Language Interfaces
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/WardBrian/tinystan" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.mc-stan.org/" title="Forums" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-users fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Forums</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item pst-header-nav-item">
+  <a class="nav-link nav-internal" href="../../languages.html">
+    Language Interfaces
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/WardBrian/tinystan" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.mc-stan.org/" title="Forums" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-users fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Forums</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tinystan.model</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for tinystan.model</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">fspath</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">dllist</span> <span class="kn">import</span> <span class="n">dllist</span>
+<span class="kn">from</span> <span class="nn">numpy.ctypeslib</span> <span class="kn">import</span> <span class="n">ndpointer</span>
+<span class="kn">from</span> <span class="nn">stanio</span> <span class="kn">import</span> <span class="n">dump_stan_json</span>
+
+<span class="kn">from</span> <span class="nn">.__version</span> <span class="kn">import</span> <span class="n">__version_info__</span>
+<span class="kn">from</span> <span class="nn">.compile</span> <span class="kn">import</span> <span class="n">compile_model</span><span class="p">,</span> <span class="n">windows_dll_path_setup</span>
+<span class="kn">from</span> <span class="nn">.output</span> <span class="kn">import</span> <span class="n">StanOutput</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">validate_readable</span>
+
+<span class="c1"># type aliases</span>
+<span class="n">StanData</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+
+
+<span class="c1"># ctypes helpers</span>
+<span class="k">def</span> <span class="nf">wrapped_ndptr</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A version of np.ctypeslib.ndpointer</span>
+<span class="sd">    which allows None (passed as NULL)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">ndpointer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">from_param</span><span class="p">(</span><span class="n">_cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="n">base</span><span class="o">.</span><span class="n">from_param</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="p">(</span><span class="n">base</span><span class="p">,),</span> <span class="p">{</span><span class="s2">&quot;from_param&quot;</span><span class="p">:</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">from_param</span><span class="p">)})</span>
+
+
+<span class="n">double_array</span> <span class="o">=</span> <span class="n">ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;C_CONTIGUOUS&quot;</span><span class="p">))</span>
+<span class="n">nullable_double_array</span> <span class="o">=</span> <span class="n">wrapped_ndptr</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;C_CONTIGUOUS&quot;</span><span class="p">))</span>
+<span class="n">err_ptr</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">)</span>
+<span class="n">print_callback_type</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CFUNCTYPE</span><span class="p">(</span>
+    <span class="kc">None</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span>
+<span class="p">)</span>
+
+
+<span class="nd">@print_callback_type</span>
+<span class="k">def</span> <span class="nf">print_callback</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">is_error</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">string_at</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
+        <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="k">if</span> <span class="n">is_error</span> <span class="k">else</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># algorithm-specific constants</span>
+
+<span class="n">HMC_SAMPLER_VARIABLES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;lp__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;accept_stat__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;stepsize__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;treedepth__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;n_leapfrog__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;divergent__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;energy__&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">PATHFINDER_VARIABLES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;lp_approx__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lp__&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">OPTIMIZE_VARIABLES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;lp__&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">LAPLACE_VARIABLES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;log_p__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;log_q__&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">FIXED_SAMPLER_VARIABLES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;lp__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;accept_stat__&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="HMCMetric">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.HMCMetric">[docs]</a>
+<span class="k">class</span> <span class="nc">HMCMetric</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Choices for the structure of the mass matrix used in the HMC sampler.&quot;&quot;&quot;</span>
+
+    <span class="n">UNIT</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: :meta hide-value:</span>
+    <span class="n">DENSE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: :meta hide-value:</span>
+    <span class="n">DIAGONAL</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: :meta hide-value:</span></div>
+
+
+
+<div class="viewcode-block" id="OptimizationAlgorithm">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.OptimizationAlgorithm">[docs]</a>
+<span class="k">class</span> <span class="nc">OptimizationAlgorithm</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Choices for the optimization algorithm to use.&quot;&quot;&quot;</span>
+
+    <span class="n">NEWTON</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: :meta hide-value:</span>
+    <span class="n">BFGS</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: :meta hide-value:</span>
+    <span class="n">LBFGS</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: :meta hide-value:</span></div>
+
+
+
+<span class="n">_exception_types</span> <span class="o">=</span> <span class="p">[</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">KeyboardInterrupt</span><span class="p">]</span>
+
+
+<span class="c1"># TODO also allow inits from a StanOutput?</span>
+<span class="k">def</span> <span class="nf">encode_stan_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Turn the provided data into something we can send to C++.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">):</span>
+        <span class="n">validate_readable</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fspath</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">dump_stan_json</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">rand_u32</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a random 32-bit unsigned integer.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_laplace_inputs</span><span class="p">(</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">StanOutput</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">StanOutput</span><span class="p">):</span>
+        <span class="c1"># handle case of passing optimization output directly</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mode</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Laplace can only be used with Optimization output&quot;</span><span class="p">)</span>
+            <span class="c1"># mode = mode.create_inits(chains=1, seed=seed)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">mode_json</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">mode_array</span> <span class="o">=</span> <span class="n">mode</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mode_json</span> <span class="o">=</span> <span class="n">encode_stan_json</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="n">mode_array</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">mode_array</span><span class="p">,</span> <span class="n">mode_json</span>
+
+
+<div class="viewcode-block" id="Model">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.Model">[docs]</a>
+<span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">],</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">capture_stan_prints</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">stanc_args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">make_args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load a Stan model for inference, compiling it if necessary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        model : Union[str, PathLike]</span>
+<span class="sd">            Path to the Stan model file or shared object.</span>
+<span class="sd">        stanc_args : List[str], optional</span>
+<span class="sd">            A list of arguments to pass to stanc3 if the model is not compiled.</span>
+<span class="sd">            For example, ``[&quot;--O1&quot;]`` will enable compiler optimization level 1.</span>
+<span class="sd">        make_args : List[str], optional</span>
+<span class="sd">            A list of additional arguments to pass to GNU Make if the</span>
+<span class="sd">            model is not compiled. For example, ``[&quot;STAN_THREADS=True&quot;]`` will enable</span>
+<span class="sd">            threading for the compiled model. If the same flags are defined</span>
+<span class="sd">            in ``make/local``, the versions passed here will take precedent.</span>
+<span class="sd">        capture_stan_prints : bool, optional</span>
+<span class="sd">            If ``True``, capture all ``print`` statements and output</span>
+<span class="sd">            from Stan and print them from Python. This may have</span>
+<span class="sd">            a performance impact. If ``False``, ``print`` statements</span>
+<span class="sd">            from Stan will be sent to ``cout`` and will not be seen in</span>
+<span class="sd">            Jupyter or capturable with :func:`contextlib.redirect_stdout`.</span>
+
+<span class="sd">            **Note:** If this is set for a model, any other models instantiated</span>
+<span class="sd">            from the *same shared library* will also have the callback set, even</span>
+<span class="sd">            if they were created *before* this model.</span>
+<span class="sd">        warn : bool, optional</span>
+<span class="sd">            If ``False``, the warning about re-loading the same shared object</span>
+<span class="sd">            is suppressed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">windows_dll_path_setup</span><span class="p">()</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">fspath</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.stan&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_path</span> <span class="o">=</span> <span class="n">compile_model</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span> <span class="n">stanc_args</span><span class="o">=</span><span class="n">stanc_args</span><span class="p">,</span> <span class="n">make_args</span><span class="o">=</span><span class="n">make_args</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_path</span> <span class="o">=</span> <span class="n">model</span>
+
+        <span class="k">if</span> <span class="n">warn</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib_path</span> <span class="ow">in</span> <span class="n">dllist</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Loading a shared object </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lib_path</span><span class="si">}</span><span class="s2"> that has already been loaded.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;If the file has changed since the last time it was loaded, this load may &quot;</span>
+                <span class="s2">&quot;not update the library!&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lib_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_api_version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="n">api_ver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">api_ver</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">__version_info__</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s2">&quot;Incompatible TinyStan API version. Expected &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">__version_info__</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="n">api_ver</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;You need to re-compile your model.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">api_ver</span> <span class="o">!=</span> <span class="n">__version_info__</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;TinyStan API version does not match. Expected &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">__version_info__</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="n">api_ver</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;You may need to re-compile your model.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_create_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_model</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_model</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span> <span class="n">err_ptr</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_destroy_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_model</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_model</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_param_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_model_param_names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_param_names</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_param_names</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_free_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_model_num_free_params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_free_params</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_free_params</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stan_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_stan_version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stan_version</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stan_version</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_sample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_sample</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_sample</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>  <span class="c1"># model</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span>  <span class="c1"># num_chains</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span>  <span class="c1"># inits</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># seed</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># id</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># init_radius</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_warmup</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_samples</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># really enum for metric</span>
+            <span class="n">nullable_double_array</span><span class="p">,</span>  <span class="c1"># metric init in</span>
+            <span class="c1"># adaptation</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>  <span class="c1"># adapt</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># delta</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># gamma</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># kappa</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># t0</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># init_buffer</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># term_buffer</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># window</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>  <span class="c1"># save_warmup</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># stepsize</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># stepsize_jitter</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># max_depth</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># refresh</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_threads</span>
+            <span class="n">double_array</span><span class="p">,</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span>  <span class="c1"># buffer size</span>
+            <span class="n">nullable_double_array</span><span class="p">,</span>  <span class="c1"># metric out</span>
+            <span class="n">err_ptr</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_pathfinder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_pathfinder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_pathfinder</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_pathfinder</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>  <span class="c1"># model</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span>  <span class="c1"># num_paths</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span>  <span class="c1"># inits</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># seed</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># id</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># init_radius</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_draws</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># max_history_size</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># init_alpha</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_obj</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_rel_obj</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_grad</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_rel_grad</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_param</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_iterations</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_elbo_draws</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_multi_draws</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>  <span class="c1"># calculate_lp</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>  <span class="c1"># psis_resample</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># refresh</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_threads</span>
+            <span class="n">double_array</span><span class="p">,</span>  <span class="c1"># output samples</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span>  <span class="c1"># buffer size</span>
+            <span class="n">err_ptr</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_optimize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_optimize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_optimize</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_optimize</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>  <span class="c1"># model</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span>  <span class="c1"># inits</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># seed</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># id</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># init_radius</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># really enum for algorithm</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_iterations</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>  <span class="c1"># jacobian</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># max_history_size</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># init_alpha</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_obj</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_rel_obj</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_grad</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_rel_grad</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span>  <span class="c1"># tol_param</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># refresh</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_threads</span>
+            <span class="n">double_array</span><span class="p">,</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span>  <span class="c1"># buffer size</span>
+            <span class="n">err_ptr</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_laplace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_laplace_sample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_laplace</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_laplace</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>  <span class="c1"># model</span>
+            <span class="n">nullable_double_array</span><span class="p">,</span>  <span class="c1"># array of constrained params</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span>  <span class="c1"># json of constrained params</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint</span><span class="p">,</span>  <span class="c1"># seed</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># draws</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>  <span class="c1"># jacobian</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>  <span class="c1"># calculate_lp</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># refresh</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>  <span class="c1"># num_threads</span>
+            <span class="n">double_array</span><span class="p">,</span>  <span class="c1"># draws buffer</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span>  <span class="c1"># buffer size</span>
+            <span class="n">nullable_double_array</span><span class="p">,</span>  <span class="c1"># hessian out</span>
+            <span class="n">err_ptr</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_get_error_message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_msg</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_msg</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_get_error_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_type</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>  <span class="c1"># really enum</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_type</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_free_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_destroy_error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_free_error</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_free_error</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+
+        <span class="n">get_separator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_separator_char</span>
+        <span class="n">get_separator</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span>
+        <span class="n">get_separator</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sep</span> <span class="o">=</span> <span class="n">get_separator</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">capture_stan_prints</span><span class="p">:</span>
+            <span class="n">set_print_callback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">tinystan_set_print_callback</span>
+            <span class="n">set_print_callback</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">set_print_callback</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">print_callback_type</span><span class="p">]</span>
+            <span class="n">set_print_callback</span><span class="p">(</span><span class="n">print_callback</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_raise_for_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rc</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">err</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">contents</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_msg</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+                <span class="n">exception_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_error_type</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_free_error</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+                <span class="n">exn</span> <span class="o">=</span> <span class="n">_exception_types</span><span class="p">[</span><span class="n">exception_type</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="n">exn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown error, function returned code </span><span class="si">{</span><span class="n">rc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+    <span class="k">def</span> <span class="nf">_get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="p">):</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">())</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_model</span><span class="p">(</span><span class="n">encode_stan_json</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">seed</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raise_for_error</span><span class="p">(</span><span class="ow">not</span> <span class="n">model</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">model</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_delete_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_encode_inits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inits</span><span class="p">,</span> <span class="n">chains</span><span class="p">,</span> <span class="n">seed</span><span class="p">):</span>
+        <span class="n">inits_encoded</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">inits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inits</span><span class="p">,</span> <span class="n">StanOutput</span><span class="p">):</span>
+                <span class="n">inits</span> <span class="o">=</span> <span class="n">inits</span><span class="o">.</span><span class="n">create_inits</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="n">chains</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inits</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">inits_encoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">encode_stan_json</span><span class="p">(</span><span class="n">init</span><span class="p">)</span> <span class="k">for</span> <span class="n">init</span> <span class="ow">in</span> <span class="n">inits</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inits_encoded</span> <span class="o">=</span> <span class="n">encode_stan_json</span><span class="p">(</span><span class="n">inits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inits_encoded</span>
+
+    <span class="k">def</span> <span class="nf">_get_parameter_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="n">comma_separated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_param_names</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">comma_separated</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">comma_separated</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Model.api_version">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.Model.api_version">[docs]</a>
+    <span class="k">def</span> <span class="nf">api_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the version of the TinyStan API backing this model.&quot;&quot;&quot;</span>
+        <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">,</span> <span class="n">patch</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">major</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">minor</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">patch</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">major</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">minor</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">patch</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Model.stan_version">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.Model.stan_version">[docs]</a>
+    <span class="k">def</span> <span class="nf">stan_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the version of Stan backing this model.&quot;&quot;&quot;</span>
+        <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">,</span> <span class="n">patch</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stan_version</span><span class="p">(</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">major</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">minor</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">major</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">minor</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">patch</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Model.sample">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.Model.sample">[docs]</a>
+    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">StanData</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">num_chains</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">inits</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">StanData</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">StanData</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">init_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">num_warmup</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">HMCMetric</span> <span class="o">=</span> <span class="n">HMCMetric</span><span class="o">.</span><span class="n">DIAGONAL</span><span class="p">,</span>
+        <span class="n">init_inv_metric</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_metric</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">adapt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">delta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">kappa</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+        <span class="n">t0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">init_buffer</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">75</span><span class="p">,</span>
+        <span class="n">term_buffer</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="n">save_warmup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">stepsize</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">stepsize_jitter</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">refresh</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run Stan&#39;s No-U-Turn Sampler (NUTS) to sample from the posterior.</span>
+<span class="sd">        An in-depth explanation of the parameters can be found in the Stan</span>
+<span class="sd">        documentation at https://mc-stan.org/docs/reference-manual/mcmc.html</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : str | dict, optional</span>
+<span class="sd">            The data to use for the model. This can be a</span>
+<span class="sd">            path to a JSON file, a JSON string, or a dictionary.</span>
+<span class="sd">            By default, &quot;&quot;</span>
+<span class="sd">        num_chains : int, optional</span>
+<span class="sd">            The number of chains to run, by default 4</span>
+<span class="sd">        inits : str | dict | list[str | dict] | None, optional</span>
+<span class="sd">            Initial parameter values. This can be a single</span>
+<span class="sd">            path to a JSON file, a JSON string, a dictionary, or a</span>
+<span class="sd">            list of length ``num_chains`` of those.</span>
+<span class="sd">            By default, &quot;&quot;</span>
+<span class="sd">        seed : Optional[int], optional</span>
+<span class="sd">            The seed to use for the random number generator.</span>
+<span class="sd">            If not provided, a random seed will be generated.</span>
+<span class="sd">        id : int, optional</span>
+<span class="sd">            Chain ID for the first chain, by default 1</span>
+<span class="sd">        init_radius : float, optional</span>
+<span class="sd">            Radius to initialize unspecified parameters within.</span>
+<span class="sd">            The parameter values are drawn uniformly from the interval</span>
+<span class="sd">            [-init_radius, init_radius] on the unconstrained scale.</span>
+<span class="sd">            By default 2.0</span>
+<span class="sd">        num_warmup : int, optional</span>
+<span class="sd">            Number of warmup iterations to run, by default 1000</span>
+<span class="sd">        num_samples : int, optional</span>
+<span class="sd">            Number of samples to draw after warmup, by default 1000</span>
+<span class="sd">        metric : HMCMetric, optional</span>
+<span class="sd">            The type of mass matrix to use in the sampler.</span>
+<span class="sd">            The options are ``UNIT``, ``DENSE``, and ``DIAGONAL``.</span>
+<span class="sd">            By default HMCMetric.DIAGONAL</span>
+<span class="sd">        init_inv_metric : Optional[np.ndarray], optional</span>
+<span class="sd">            Initial value for the mass matrix used by the sampler.</span>
+<span class="sd">            Valid shapes depend on the value of ``metric``. Can have</span>
+<span class="sd">            a leading dimension of ``num_chains`` to specify different</span>
+<span class="sd">            initial metrics for each chain.</span>
+<span class="sd">        save_metric : bool, optional</span>
+<span class="sd">            Whether to report the final mass matrix, by default False</span>
+<span class="sd">        adapt : bool, optional</span>
+<span class="sd">            Whether the sampler should adapt the step size and metric,</span>
+<span class="sd">            by default True</span>
+<span class="sd">        delta : float, optional</span>
+<span class="sd">            Target average acceptance probability, by default 0.8</span>
+<span class="sd">        gamma : float, optional</span>
+<span class="sd">            Adaptation regularization scale, by default 0.05</span>
+<span class="sd">        kappa : float, optional</span>
+<span class="sd">            Adaptation relaxation exponent, by default 0.75</span>
+<span class="sd">        t0 : float, optional</span>
+<span class="sd">            Adaptation iteration offset, by default 10</span>
+<span class="sd">        init_buffer : int, optional</span>
+<span class="sd">            Number of warmup samples to use for initial step size adaptation,</span>
+<span class="sd">            by default 75</span>
+<span class="sd">        term_buffer : int, optional</span>
+<span class="sd">            Number of warmup samples to use for step size adaptation</span>
+<span class="sd">            after the metric is adapted, by default 50</span>
+<span class="sd">        window : int, optional</span>
+<span class="sd">            Initial number of iterations to use for metric adaptation,</span>
+<span class="sd">            which is doubled each time the adaptation window is hit,</span>
+<span class="sd">            by default 25</span>
+<span class="sd">        save_warmup : bool, optional</span>
+<span class="sd">            Whether to save the warmup samples, by default False</span>
+<span class="sd">        stepsize : float, optional</span>
+<span class="sd">            Initial step size for the sampler, by default 1.0</span>
+<span class="sd">        stepsize_jitter : float, optional</span>
+<span class="sd">            Amount of random jitter to add to the step size, by default 0.0</span>
+<span class="sd">        max_depth : int, optional</span>
+<span class="sd">            Maximum tree depth for the sampler, by default 10</span>
+<span class="sd">        refresh : int, optional</span>
+<span class="sd">            Number of iterations between progress messages, by default 0</span>
+<span class="sd">            (supress messages)</span>
+<span class="sd">        num_threads : int, optional</span>
+<span class="sd">            Number of threads to use for sampling, by default -1</span>
+<span class="sd">            (use all available)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        StanOutput</span>
+<span class="sd">            An object containing the samples and metadata from the sampling run.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any of the parameters are invalid or out of range.</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            If there is an unrecoverable error during sampling.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># these are checked here because they&#39;re sizes for &quot;out&quot;</span>
+        <span class="k">if</span> <span class="n">num_chains</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_chains must be at least 1&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_warmup</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_warmup must be non-negative&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_samples</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_samples must be at least 1&quot;</span><span class="p">)</span>
+
+        <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span> <span class="ow">or</span> <span class="n">rand_u32</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+            <span class="n">model_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_free_params</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">model_params</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Model has no parameters to sample.&quot;</span><span class="p">)</span>
+
+            <span class="n">param_names</span> <span class="o">=</span> <span class="n">HMC_SAMPLER_VARIABLES</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_parameter_names</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+            <span class="n">num_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span>
+            <span class="n">num_draws</span> <span class="o">=</span> <span class="n">num_samples</span> <span class="o">+</span> <span class="n">num_warmup</span> <span class="o">*</span> <span class="n">save_warmup</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_chains</span><span class="p">,</span> <span class="n">num_draws</span><span class="p">,</span> <span class="n">num_params</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+            <span class="n">metric_size</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">model_params</span><span class="p">,</span> <span class="n">model_params</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="n">HMCMetric</span><span class="o">.</span><span class="n">DENSE</span>
+                <span class="k">else</span> <span class="p">(</span><span class="n">model_params</span><span class="p">,)</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">init_inv_metric</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">init_inv_metric</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">metric_size</span><span class="p">:</span>
+                    <span class="n">init_inv_metric</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span>
+                        <span class="n">init_inv_metric</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">num_chains</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">init_inv_metric</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">num_chains</span><span class="p">,</span> <span class="o">*</span><span class="n">metric_size</span><span class="p">):</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Invalid initial metric size. Expected a </span><span class="si">{</span><span class="n">metric_size</span><span class="si">}</span><span class="s2"> &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;or </span><span class="si">{</span><span class="p">(</span><span class="n">num_chains</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">metric_size</span><span class="p">)</span><span class="si">}</span><span class="s2"> matrix.&quot;</span>
+                    <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">save_metric</span><span class="p">:</span>
+                <span class="n">metric_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_chains</span><span class="p">,</span> <span class="o">*</span><span class="n">metric_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">metric_out</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">err</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">())</span>
+            <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_sample</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span>
+                <span class="n">num_chains</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_encode_inits</span><span class="p">(</span><span class="n">inits</span><span class="p">,</span> <span class="n">num_chains</span><span class="p">,</span> <span class="n">seed</span><span class="p">),</span>
+                <span class="n">seed</span><span class="p">,</span>
+                <span class="nb">id</span><span class="p">,</span>
+                <span class="n">init_radius</span><span class="p">,</span>
+                <span class="n">num_warmup</span><span class="p">,</span>
+                <span class="n">num_samples</span><span class="p">,</span>
+                <span class="n">metric</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">init_inv_metric</span><span class="p">,</span>
+                <span class="n">adapt</span><span class="p">,</span>
+                <span class="n">delta</span><span class="p">,</span>
+                <span class="n">gamma</span><span class="p">,</span>
+                <span class="n">kappa</span><span class="p">,</span>
+                <span class="n">t0</span><span class="p">,</span>
+                <span class="n">init_buffer</span><span class="p">,</span>
+                <span class="n">term_buffer</span><span class="p">,</span>
+                <span class="n">window</span><span class="p">,</span>
+                <span class="n">save_warmup</span><span class="p">,</span>
+                <span class="n">stepsize</span><span class="p">,</span>
+                <span class="n">stepsize_jitter</span><span class="p">,</span>
+                <span class="n">max_depth</span><span class="p">,</span>
+                <span class="n">refresh</span><span class="p">,</span>
+                <span class="n">num_threads</span><span class="p">,</span>
+                <span class="n">out</span><span class="p">,</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                <span class="n">metric_out</span><span class="p">,</span>
+                <span class="n">err</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_for_error</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">StanOutput</span><span class="p">(</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">save_metric</span><span class="p">:</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric_out</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+
+<div class="viewcode-block" id="Model.pathfinder">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.Model.pathfinder">[docs]</a>
+    <span class="k">def</span> <span class="nf">pathfinder</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">StanData</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">num_paths</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">inits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StanData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">init_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">num_draws</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">max_history_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">init_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="n">tol_obj</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-12</span><span class="p">,</span>
+        <span class="n">tol_rel_obj</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e4</span><span class="p">,</span>
+        <span class="n">tol_grad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span>
+        <span class="n">tol_rel_grad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e7</span><span class="p">,</span>
+        <span class="n">tol_param</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span>
+        <span class="n">num_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">num_elbo_draws</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="n">num_multi_draws</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">calculate_lp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">psis_resample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">refresh</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run the Pathfinder algorithm to approximate the posterior.</span>
+<span class="sd">        See https://mc-stan.org/docs/reference-manual/pathfinder.html</span>
+<span class="sd">        for more information on the algorithm.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : str | dict, optional</span>
+<span class="sd">            The data to use for the model. This can be a</span>
+<span class="sd">            path to a JSON file, a JSON string, or a dictionary.</span>
+<span class="sd">            By default, &quot;&quot;</span>
+<span class="sd">        num_paths : int, optional</span>
+<span class="sd">            The number of individual runs of the algorithm to run in parallel, by default 4</span>
+<span class="sd">        inits : str | dict | list[str | dict] | None, optional</span>
+<span class="sd">            Initial parameter values. This can be a single</span>
+<span class="sd">            path to a JSON file, a JSON string, a dictionary, or a</span>
+<span class="sd">            list of length ``num_paths`` of those.</span>
+<span class="sd">            By default, &quot;&quot;</span>
+<span class="sd">        seed : Optional[int], optional</span>
+<span class="sd">            The seed to use for the random number generator.</span>
+<span class="sd">            If not provided, a random seed will be generated.</span>
+<span class="sd">        id : int, optional</span>
+<span class="sd">            ID for the first path, by default 1</span>
+<span class="sd">        init_radius : float, optional</span>
+<span class="sd">            Radius to initialize unspecified parameters within.</span>
+<span class="sd">            The parameter values are drawn uniformly from the interval</span>
+<span class="sd">            [-init_radius, init_radius] on the unconstrained scale.</span>
+<span class="sd">            By default 2.0</span>
+<span class="sd">        num_draws : int, optional</span>
+<span class="sd">            Number of approximate draws drawn from each of the</span>
+<span class="sd">            ``num_paths`` Pathfinders, by default 1000</span>
+<span class="sd">        max_history_size : int, optional</span>
+<span class="sd">            History size used by the internal L-BFGS algorithm to</span>
+<span class="sd">            approximate the Hessian, by default 5</span>
+<span class="sd">        init_alpha : float, optional</span>
+<span class="sd">            Initial step size for the internal L-BFGS algorithm,</span>
+<span class="sd">            by default 0.001</span>
+<span class="sd">        tol_obj : float, optional</span>
+<span class="sd">            Convergence tolerance for the objective function for</span>
+<span class="sd">            the internal L-BFGS algorithm, by default 1e-12</span>
+<span class="sd">        tol_rel_obj : float, optional</span>
+<span class="sd">            Relative convergence tolerance for the objective function</span>
+<span class="sd">            for the internal L-BFGS algorithm, by default 1e4</span>
+<span class="sd">        tol_grad : float, optional</span>
+<span class="sd">            Convergence tolerance for the gradient norm for the internal</span>
+<span class="sd">            L-BFGS algorithm, by default 1e-8</span>
+<span class="sd">        tol_rel_grad : float, optional</span>
+<span class="sd">            Relative convergence tolerance for the gradient norm for the</span>
+<span class="sd">            internal L-BFGS algorithm, by default 1e7</span>
+<span class="sd">        tol_param : float, optional</span>
+<span class="sd">            Convergence tolerance for the changes in parameters for the</span>
+<span class="sd">            internal L-BFGS algorithm, by default 1e-8</span>
+<span class="sd">        num_iterations : int, optional</span>
+<span class="sd">            Maximum number of iterations for the internal L-BFGS algorithm,</span>
+<span class="sd">            by default 1000</span>
+<span class="sd">        num_elbo_draws : int, optional</span>
+<span class="sd">            Number of Monte Carlo draws used to estimate the ELBO,</span>
+<span class="sd">            by default 25</span>
+<span class="sd">        num_multi_draws : int, optional</span>
+<span class="sd">            Number of draws returned by Multi-Pathfinder, by default 1000</span>
+<span class="sd">        calculate_lp : bool, optional</span>
+<span class="sd">            Whether to calculate the log probability of the approximate draws.</span>
+<span class="sd">            If False, this also implies ``psis_resample=False``. By default True</span>
+<span class="sd">        psis_resample : bool, optional</span>
+<span class="sd">            Whether to use Pareto smoothed importance sampling on</span>
+<span class="sd">            the approximate draws. If False, all ``num_path * num_draws``</span>
+<span class="sd">            approximate samples will be returned. By default True.</span>
+<span class="sd">        refresh : int, optional</span>
+<span class="sd">            Number of iterations between progress messages, by default 0</span>
+<span class="sd">            (supress messages)</span>
+<span class="sd">        num_threads : int, optional</span>
+<span class="sd">            Number of threads to use for Pathfinder, by default -1</span>
+<span class="sd">            (use all available)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        StanOutput</span>
+<span class="sd">            An object containing the samples and metadata from the algorithm.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any of the parameters are invalid or out of range.</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            If there is an unrecoverable error during the algorithm.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">num_draws</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_draws must be at least 1&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_paths</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_paths must be at least 1&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_multi_draws</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_multi_draws must be at least 1&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">calculate_lp</span> <span class="ow">and</span> <span class="n">psis_resample</span><span class="p">:</span>
+            <span class="n">output_size</span> <span class="o">=</span> <span class="n">num_multi_draws</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output_size</span> <span class="o">=</span> <span class="n">num_draws</span> <span class="o">*</span> <span class="n">num_paths</span>
+
+        <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span> <span class="ow">or</span> <span class="n">rand_u32</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+            <span class="n">model_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_free_params</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">model_params</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Model has no parameters.&quot;</span><span class="p">)</span>
+
+            <span class="n">param_names</span> <span class="o">=</span> <span class="n">PATHFINDER_VARIABLES</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_parameter_names</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+            <span class="n">num_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">output_size</span><span class="p">,</span> <span class="n">num_params</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+            <span class="n">err</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">())</span>
+            <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_pathfinder</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span>
+                <span class="n">num_paths</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_encode_inits</span><span class="p">(</span><span class="n">inits</span><span class="p">,</span> <span class="n">num_paths</span><span class="p">,</span> <span class="n">seed</span><span class="p">),</span>
+                <span class="n">seed</span><span class="p">,</span>
+                <span class="nb">id</span><span class="p">,</span>
+                <span class="n">init_radius</span><span class="p">,</span>
+                <span class="n">num_draws</span><span class="p">,</span>
+                <span class="n">max_history_size</span><span class="p">,</span>
+                <span class="n">init_alpha</span><span class="p">,</span>
+                <span class="n">tol_obj</span><span class="p">,</span>
+                <span class="n">tol_rel_obj</span><span class="p">,</span>
+                <span class="n">tol_grad</span><span class="p">,</span>
+                <span class="n">tol_rel_grad</span><span class="p">,</span>
+                <span class="n">tol_param</span><span class="p">,</span>
+                <span class="n">num_iterations</span><span class="p">,</span>
+                <span class="n">num_elbo_draws</span><span class="p">,</span>
+                <span class="n">num_multi_draws</span><span class="p">,</span>
+                <span class="n">calculate_lp</span><span class="p">,</span>
+                <span class="n">psis_resample</span><span class="p">,</span>
+                <span class="n">refresh</span><span class="p">,</span>
+                <span class="n">num_threads</span><span class="p">,</span>
+                <span class="n">out</span><span class="p">,</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                <span class="n">err</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_for_error</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">StanOutput</span><span class="p">(</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Model.optimize">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.Model.optimize">[docs]</a>
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">StanData</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">init</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StanData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">init_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">algorithm</span><span class="p">:</span> <span class="n">OptimizationAlgorithm</span> <span class="o">=</span> <span class="n">OptimizationAlgorithm</span><span class="o">.</span><span class="n">LBFGS</span><span class="p">,</span>
+        <span class="n">jacobian</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">num_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span>
+        <span class="n">max_history_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">init_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="n">tol_obj</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-12</span><span class="p">,</span>
+        <span class="n">tol_rel_obj</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e4</span><span class="p">,</span>
+        <span class="n">tol_grad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span>
+        <span class="n">tol_rel_grad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e7</span><span class="p">,</span>
+        <span class="n">tol_param</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span>
+        <span class="n">refresh</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Optimize the model parameters using the specified algorithm.</span>
+
+<span class="sd">        This will find either the maximum a posteriori (MAP) estimate</span>
+<span class="sd">        or the maximum likelihood estimate (MLE) of the model parameters,</span>
+<span class="sd">        depending on the value of the ``jacobian`` parameter.</span>
+<span class="sd">        Additional parameters can be found in the Stan documentation at</span>
+<span class="sd">        https://mc-stan.org/docs/reference-manual/optimization.html</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : str | dict, optional</span>
+<span class="sd">            The data to use for the model. This can be a</span>
+<span class="sd">            path to a JSON file, a JSON string, or a dictionary.</span>
+<span class="sd">            By default, &quot;&quot;</span>
+<span class="sd">        init : str | dict | None, optional</span>
+<span class="sd">            Initial parameter values. This can be a</span>
+<span class="sd">            path to a JSON file, a JSON string, or a dictionary.</span>
+<span class="sd">            By default, &quot;&quot;</span>
+<span class="sd">        seed : Optional[int], optional</span>
+<span class="sd">            The seed to use for the random number generator.</span>
+<span class="sd">            If not provided, a random seed will be generated.</span>
+<span class="sd">        id : int, optional</span>
+<span class="sd">            ID used to offset the random number generator, by default 1</span>
+<span class="sd">        init_radius : float, optional</span>
+<span class="sd">            Radius to initialize unspecified parameters within.</span>
+<span class="sd">            The parameter values are drawn uniformly from the interval</span>
+<span class="sd">            [-init_radius, init_radius] on the unconstrained scale.</span>
+<span class="sd">            By default 2.0</span>
+<span class="sd">        algorithm : OptimizationAlgorithm, optional</span>
+<span class="sd">            Which optimization algorithm to use. Some of the following</span>
+<span class="sd">            arguments may be ignored depending on the algorithm.</span>
+<span class="sd">            By default OptimizationAlgorithm.LBFGS</span>
+<span class="sd">        jacobian : bool, optional</span>
+<span class="sd">            Whether to apply the Jacobian change of variables to the</span>
+<span class="sd">            log density. If False, the algorithm will find the MLE.</span>
+<span class="sd">            If True, the algorithm will find the MAP estimate.</span>
+<span class="sd">            By default False</span>
+<span class="sd">        num_iterations : int, optional</span>
+<span class="sd">            Maximum number of iterations to run the optimization,</span>
+<span class="sd">            by default 2000</span>
+<span class="sd">        max_history_size : int, optional</span>
+<span class="sd">            History size used to approximate the Hessian, by default 5</span>
+<span class="sd">        init_alpha : float, optional</span>
+<span class="sd">            Initial step size, by default 0.001</span>
+<span class="sd">        tol_obj : float, optional</span>
+<span class="sd">            Convergence tolerance for the objective function,</span>
+<span class="sd">            by default 1e-12</span>
+<span class="sd">        tol_rel_obj : float, optional</span>
+<span class="sd">            Relative convergence tolerance for the objective function,</span>
+<span class="sd">            by default 1e4</span>
+<span class="sd">        tol_grad : float, optional</span>
+<span class="sd">            Convergence tolerance for the gradient norm, by default 1e-8</span>
+<span class="sd">        tol_rel_grad : float, optional</span>
+<span class="sd">            Relative convergence tolerance for the gradient norm,</span>
+<span class="sd">            by default 1e7</span>
+<span class="sd">        tol_param : float, optional</span>
+<span class="sd">            Convergence tolerance for the changes in parameters,</span>
+<span class="sd">            by default 1e-8</span>
+<span class="sd">        refresh : int, optional</span>
+<span class="sd">            Number of iterations between progress messages, by default 0</span>
+<span class="sd">            (supress messages)</span>
+<span class="sd">        num_threads : int, optional</span>
+<span class="sd">            Number of threads to use for log density evaluations, by default -1</span>
+<span class="sd">            (use all available)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        StanOutput</span>
+<span class="sd">            An object containing the samples and metadata from the algorithm.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any of the parameters are invalid or out of range.</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            If there is an unrecoverable error during the algorithm.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span> <span class="ow">or</span> <span class="n">rand_u32</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+            <span class="n">param_names</span> <span class="o">=</span> <span class="n">OPTIMIZE_VARIABLES</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_parameter_names</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+            <span class="n">num_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_params</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+            <span class="n">err</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">())</span>
+            <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_optimize</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_encode_inits</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="p">),</span>
+                <span class="n">seed</span><span class="p">,</span>
+                <span class="nb">id</span><span class="p">,</span>
+                <span class="n">init_radius</span><span class="p">,</span>
+                <span class="n">algorithm</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">num_iterations</span><span class="p">,</span>
+                <span class="n">jacobian</span><span class="p">,</span>
+                <span class="n">max_history_size</span><span class="p">,</span>
+                <span class="n">init_alpha</span><span class="p">,</span>
+                <span class="n">tol_obj</span><span class="p">,</span>
+                <span class="n">tol_rel_obj</span><span class="p">,</span>
+                <span class="n">tol_grad</span><span class="p">,</span>
+                <span class="n">tol_rel_grad</span><span class="p">,</span>
+                <span class="n">tol_param</span><span class="p">,</span>
+                <span class="n">refresh</span><span class="p">,</span>
+                <span class="n">num_threads</span><span class="p">,</span>
+                <span class="n">out</span><span class="p">,</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                <span class="n">err</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_for_error</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">StanOutput</span><span class="p">(</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Model.laplace_sample">
+<a class="viewcode-back" href="../../languages/python.html#tinystan.Model.laplace_sample">[docs]</a>
+    <span class="k">def</span> <span class="nf">laplace_sample</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">StanOutput</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">StanData</span><span class="p">],</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">StanData</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_draws</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">jacobian</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">calculate_lp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">save_hessian</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">refresh</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sample from the Laplace approximation of the posterior</span>
+<span class="sd">        centered at the provided mode.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mode : Union[StanOutput, np.ndarray, StanData]</span>
+<span class="sd">            The mode of the Laplace approximation. This can be a</span>
+<span class="sd">            StanOutput object from :meth:`~Model.optimize`, a numpy</span>
+<span class="sd">            array, a path to a JSON file, a JSON string, or a dictionary.</span>
+<span class="sd">        data : str | dict, optional</span>
+<span class="sd">            The data to use for the model. This can be a</span>
+<span class="sd">            path to a JSON file, a JSON string, or a dictionary.</span>
+<span class="sd">            By default, &quot;&quot;</span>
+<span class="sd">        seed : Optional[int], optional</span>
+<span class="sd">            The seed to use for the random number generator.</span>
+<span class="sd">            If not provided, a random seed will be generated.</span>
+<span class="sd">        num_draws : int, optional</span>
+<span class="sd">            Number of draws, by default 1000</span>
+<span class="sd">        jacobian : bool, optional</span>
+<span class="sd">            Whether to apply the Jacobian change of variables to the</span>
+<span class="sd">            log density. **Note:** This should match the value used</span>
+<span class="sd">            when the mode was calculated.</span>
+<span class="sd">            By default True.</span>
+<span class="sd">        calculate_lp : bool, optional</span>
+<span class="sd">            Whether to calculate the log probability of the samples,</span>
+<span class="sd">            by default True</span>
+<span class="sd">        save_hessian : bool, optional</span>
+<span class="sd">            Whether to save the Hessian matrix calculated at the mode,</span>
+<span class="sd">            by default False</span>
+<span class="sd">        refresh : int, optional</span>
+<span class="sd">            Number of iterations between progress messages, by default 0</span>
+<span class="sd">            (supress messages)</span>
+<span class="sd">        num_threads : int, optional</span>
+<span class="sd">            Number of threads to use for log density evaluations, by default -1</span>
+<span class="sd">            (use all available)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        StanOutput</span>
+<span class="sd">            An object containing the samples and metadata from the algorithm.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any of the parameters are invalid or out of range.</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            If there is an unrecoverable error during the algorithm.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">num_draws</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_draws must be at least 1&quot;</span><span class="p">)</span>
+
+        <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span> <span class="ow">or</span> <span class="n">rand_u32</span><span class="p">()</span>
+
+        <span class="n">mode_array</span><span class="p">,</span> <span class="n">mode_json</span> <span class="o">=</span> <span class="n">preprocess_laplace_inputs</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+            <span class="n">param_names</span> <span class="o">=</span> <span class="n">LAPLACE_VARIABLES</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_parameter_names</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+            <span class="n">num_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">mode_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">mode_array</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_params</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">LAPLACE_VARIABLES</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Mode array has incorrect length. Expected </span><span class="si">{</span><span class="n">num_params</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">LAPLACE_VARIABLES</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot; but got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mode_array</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_draws</span><span class="p">,</span> <span class="n">num_params</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+            <span class="n">model_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_free_params</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+            <span class="n">hessian_out</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">model_params</span><span class="p">,</span> <span class="n">model_params</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">save_hessian</span>
+                <span class="k">else</span> <span class="kc">None</span>
+            <span class="p">)</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">())</span>
+
+            <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ffi_laplace</span><span class="p">(</span>
+                <span class="n">model</span><span class="p">,</span>
+                <span class="n">mode_array</span><span class="p">,</span>
+                <span class="n">mode_json</span><span class="p">,</span>
+                <span class="n">seed</span><span class="p">,</span>
+                <span class="n">num_draws</span><span class="p">,</span>
+                <span class="n">jacobian</span><span class="p">,</span>
+                <span class="n">calculate_lp</span><span class="p">,</span>
+                <span class="n">refresh</span><span class="p">,</span>
+                <span class="n">num_threads</span><span class="p">,</span>
+                <span class="n">out</span><span class="p">,</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                <span class="n">hessian_out</span><span class="p">,</span>
+                <span class="n">err</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_for_error</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">StanOutput</span><span class="p">(</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">save_hessian</span><span class="p">:</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">hessian</span> <span class="o">=</span> <span class="n">hessian_out</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, TinyStan Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
