@@ -1,0 +1,28 @@
+{
+  "name": "tinystan",
+  "version": "0.1.0",
+  "description": "Typescript wrappers around Stan models built with emscripten",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/WardBrian/tinystan",
+  "author": "Brian Ward",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsup",
+    "format": "prettier . --write"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^9.4.0",
+    "prettier": "^3.3.1",
+    "tsup": "^8.1.0",
+    "typescript": "^5.2.2",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {}
+}
