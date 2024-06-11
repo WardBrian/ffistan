@@ -1,10 +1,20 @@
 {
   "name": "tinystan",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Typescript wrappers around Stan models built with emscripten",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./util": {
+      "types": "./dist/util.d.ts",
+      "import": "./dist/util.js",
+      "require": "./dist/util.cjs"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -14,7 +24,22 @@
   "scripts": {
     "test": "vitest run",
     "build": "tsup",
+    "dev": "tsup --watch",
     "format": "prettier . --write"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts",
+      "src/util.ts"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "dts": true,
+    "splitting": false,
+    "sourcemap": true,
+    "clean": true
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^1.6.0",
