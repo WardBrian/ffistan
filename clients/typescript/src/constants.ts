@@ -11,7 +11,7 @@ export const HMC_SAMPLER_VARIABLES = [
 ];
 export const PATHFINDER_VARIABLES = ["lp_approx__", "lp__"];
 
-// null pointer can be any pointer type
+// NULL can be any pointer type
 const NULL = 0 as any;
 const PTR_SIZE = 4;
 

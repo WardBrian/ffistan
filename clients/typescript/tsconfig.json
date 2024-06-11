@@ -5,6 +5,11 @@
     "useDefineForClassFields": true /* Emit ECMAScript-standard-compliant class fields. */,
     /* Modules */
     "module": "ESNext" /* Specify what module code is generated. */,
+    "paths": {
+      "tinystan": ["./src/index.ts"],
+      "tinystan/*": ["./src/*"]
+    },
+    "rootDir": ".",
     /* Emit */
     "moduleResolution": "bundler",
     "outDir": "./dist/" /* Specify an output folder for all emitted files. */,

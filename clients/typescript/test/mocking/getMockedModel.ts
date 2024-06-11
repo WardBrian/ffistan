@@ -1,6 +1,6 @@
 import { expect, onTestFinished } from "vitest";
-import StanModel from "../../src";
-import { printCallbackSponge } from "../../src/util";
+import StanModel from "tinystan";
+import { printCallbackSponge } from "tinystan/util";
 import { ModuleSettings, MockedModule, mockModule } from "./WasmModule";
 
 export const getMockedModel = async (p: Partial<ModuleSettings>) => {
@@ -24,7 +24,7 @@ expect.extend({
   toHaveNoMemoryLeaks: (module: MockedModule, _) => {
     const freedAddresses = module._free.mock.calls
       .map(args => args[0])
-      .filter(x => x !== 0);
+      .filter(x => x !== 0); // free of 0 is a no-op, fine to ignore
     const uniqueFreedAddresses = new Set(freedAddresses);
     if (uniqueFreedAddresses.size !== freedAddresses.length) {
       return {

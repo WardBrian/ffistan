@@ -1,18 +1,28 @@
 {
   "name": "tinystan",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Typescript wrappers around Stan models built with emscripten",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./util": {
-      "types": "./dist/util.d.ts",
-      "import": "./dist/util.js",
-      "require": "./dist/util.cjs"
+      "import": {
+        "types": "./dist/util.d.ts",
+        "default": "./dist/util.js"
+      },
+      "require": {
+        "types": "./dist/util.d.cts",
+        "default": "./dist/util.cjs"
+      }
     }
   },
   "files": [
@@ -25,7 +35,8 @@
     "test": "vitest run",
     "build": "tsup",
     "dev": "tsup --watch",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "attw": "attw --pack ."
   },
   "tsup": {
     "entry": [
@@ -42,6 +53,7 @@
     "clean": true
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.3",
     "@vitest/coverage-v8": "^1.6.0",
     "eslint": "^9.4.0",
     "prettier": "^3.3.1",
@@ -49,5 +61,8 @@
     "typescript": "^5.2.2",
     "vitest": "^1.6.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -9,5 +9,8 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "lcov"],
     },
+    alias: {
+      tinystan: new URL("./src/", import.meta.url).pathname,
+    },
   },
 });
